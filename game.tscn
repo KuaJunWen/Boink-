@@ -8,5 +8,5 @@
 scale = Vector2(3.8800006, 1)
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=1324816692]
-position = Vector2(238, 222)
+position = Vector2(414, 253)
 texture = ExtResource("1_80nbo")
