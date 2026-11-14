@@ -1,14 +1,26 @@
 [gd_scene format=3 uid="uid://itbkb1f6l7er"]
 
-[ext_resource type="Texture2D" uid="uid://6toul02to65o" path="res://icon.svg" id="1_80nbo"]
-[ext_resource type="Script" uid="uid://biqjax03ag1k1" path="res://player.gd" id="1_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://jjg6oxadadpx" path="res://player.tscn" id="1_80nbo"]
 
-[node name="Node2D" type="Node2D" unique_id=86014103]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
+size = Vector2(737, 64)
 
-[node name="PLAYER" type="CharacterBody2D" parent="." unique_id=1979959530]
-position = Vector2(586, 324)
-script = ExtResource("1_e2o6t")
+[node name="game" type="Node2D" unique_id=86014103]
 
-[node name="player" type="Sprite2D" parent="PLAYER" unique_id=1324816692]
-position = Vector2(-1, 6)
-texture = ExtResource("1_80nbo")
+[node name="PLAYER" parent="." unique_id=1653609979 instance=ExtResource("1_80nbo")]
+position = Vector2(411, 251)
+
+[node name="floor" type="StaticBody2D" parent="." unique_id=1682969741]
+position = Vector2(-197, 207)
+scale = Vector2(1.5238587, 0.8015452)
+
+[node name="ColorRect" type="ColorRect" parent="floor" unique_id=955760480]
+offset_left = 142.0
+offset_top = 477.0
+offset_right = 186.95935
+offset_bottom = 511.4647
+scale = Vector2(16.214647, 1.8279579)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor" unique_id=756951500]
+position = Vector2(508, 505)
+shape = SubResource("RectangleShape2D_80nbo")
