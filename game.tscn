@@ -1,12 +1,6 @@
 [gd_scene format=3 uid="uid://itbkb1f6l7er"]
 
-[ext_resource type="Texture2D" uid="uid://6toul02to65o" path="res://icon.svg" id="1_80nbo"]
-
 [node name="Node2D" type="Node2D" unique_id=86014103]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2118362137]
 scale = Vector2(3.8800006, 1)
-
-[node name="Icon" type="Sprite2D" parent="." unique_id=1324816692]
-position = Vector2(238, 222)
-texture = ExtResource("1_80nbo")
