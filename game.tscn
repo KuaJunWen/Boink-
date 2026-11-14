@@ -3,3 +3,4 @@
 [node name="Node2D" type="Node2D" unique_id=86014103]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2118362137]
+scale = Vector2(3.8800006, 1)
