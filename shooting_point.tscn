@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://1v63hnwqg8u1"]
 
-[ext_resource type="Texture2D" uid="uid://b373l0x1j8dkl" path="res://New Piskel (1).png" id="1_h7rmh"]
+[ext_resource type="Texture2D" uid="uid://d1bjralpsjkli" path="res://New_Piskel.png" id="1_h7rmh"]
 
 [sub_resource type="GDScript" id="GDScript_8f2uf"]
 script/source = "extends Node2D
@@ -9,10 +9,20 @@ const shooting_scene = preload(\"res://lazer.tscn\")
 @onready var shoot_timer = $\"Shoot timer\"
 @onready var rotator = $Rotator
 
-const spawn_point_count = 20
+const spawn_point_count = 15
 const radius = 10
+@export var move_offset := Vector2(0, 200) # Distance and direction to move
+@export var duration := 5.0 # Time in seconds to reach the end
 
 func _ready() -> void:
+	$AnimatedSprite2D.play(\"default\")
+	var start_pos := position
+	var end_pos := start_pos + move_offset
+	
+	var tween := create_tween().set_loops()
+	tween.tween_property(self, \"position\", end_pos, duration)
+	tween.tween_property(self, \"position\", start_pos, duration)
+	 	
 	var step = 2 * PI / spawn_point_count
 	
 	# Generate static spawn points in a circle around the rotator node
@@ -27,6 +37,8 @@ func _ready() -> void:
 		
 	shoot_timer.wait_time = 1
 	shoot_timer.start()
+	
+	
 
 # NOTE: No _process(delta) function is used here, so it remains completely still.
 
@@ -39,15 +51,39 @@ func _on_shoot_timer_timeout() -> void:
 		lazer.global_rotation = s.global_rotation
 "
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8f2uf"]
+atlas = ExtResource("1_h7rmh")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exdhw"]
+atlas = ExtResource("1_h7rmh")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ll15r"]
+atlas = ExtResource("1_h7rmh")
+region = Rect2(0, 100, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wgdeu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8f2uf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exdhw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ll15r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
 [node name="Shooting Point" type="Node2D" unique_id=398007201]
 position = Vector2(228, 114.99999)
 scale = Vector2(3.0197392, 3.1904168)
 script = SubResource("GDScript_8f2uf")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=467774362]
-position = Vector2(7.000001, 1)
-scale = Vector2(0.10117938, 0.110611044)
-texture = ExtResource("1_h7rmh")
 
 [node name="Shoot timer" type="Timer" parent="." unique_id=1997373260]
 wait_time = 0.351
@@ -55,5 +91,9 @@ autostart = true
 
 [node name="Rotator" type="Node2D" parent="." unique_id=1634964828]
 position = Vector2(7, 9)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=712976662]
+sprite_frames = SubResource("SpriteFrames_wgdeu")
+frame_progress = 0.9986925
 
 [connection signal="timeout" from="Shoot timer" to="." method="_on_shoot_timer_timeout"]

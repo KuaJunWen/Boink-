@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://tbgxp7pu2ocl"]
 
-[ext_resource type="Texture2D" uid="uid://b373l0x1j8dkl" path="res://New Piskel (1).png" id="1_avoeb"]
+[ext_resource type="Texture2D" uid="uid://xii10vvxq0bg" path="res://New_Piskel_3.png" id="1_pxg10"]
 [ext_resource type="AudioStream" uid="uid://dpsj6trusm56a" path="res://hit.mp3" id="2_pxg10"]
 
 [sub_resource type="GDScript" id="GDScript_jhyuc"]
@@ -37,7 +37,7 @@ script = SubResource("GDScript_jhyuc")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2030805703]
 position = Vector2(0, 11)
 scale = Vector2(0.111360155, 0.10993563)
-texture = ExtResource("1_avoeb")
+texture = ExtResource("1_pxg10")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=694152805]
 

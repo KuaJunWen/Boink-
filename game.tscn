@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://itbkb1f6l7er"]
 
 [ext_resource type="PackedScene" uid="uid://jjg6oxadadpx" path="res://player.tscn" id="1_80nbo"]
-[ext_resource type="Script" path="res://game.gd" id="1_feb5d"]
+[ext_resource type="Script" uid="uid://2tfr8gqdlv5n" path="res://game.gd" id="1_feb5d"]
 [ext_resource type="Texture2D" uid="uid://maoy6vdokvfc" path="res://730e4b1120364d98ba6a115a7000abab.png" id="2_7jktm"]
 [ext_resource type="PackedScene" uid="uid://1v63hnwqg8u1" path="res://shooting_point.tscn" id="3_feb5d"]
 [ext_resource type="Script" uid="uid://vu3f2bqnaqqn" path="res://game_manager.gd" id="5_7jktm"]
@@ -19,20 +19,12 @@ scale = Vector2(0.4539062, 0.45486107)
 texture = ExtResource("2_7jktm")
 
 [node name="PLAYER" parent="." unique_id=1653609979 instance=ExtResource("1_80nbo")]
-position = Vector2(471, 444)
+position = Vector2(616, 450.00003)
 scale = Vector2(0.3964425, 0.3820114)
 
 [node name="floor" type="StaticBody2D" parent="." unique_id=1682969741]
 position = Vector2(-560, 256)
 scale = Vector2(2.2890353, 0.8015452)
-
-[node name="ColorRect" type="ColorRect" parent="floor" unique_id=955760480]
-offset_left = 142.0
-offset_top = 477.0
-offset_right = 187.39317
-offset_bottom = 511.4647
-scale = Vector2(16.214647, 1.8279579)
-metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="floor" unique_id=756951500]
 position = Vector2(508.07428, 515.2548)
@@ -43,30 +35,15 @@ debug_color = Color(0.7925101, 0.40960914, 0.3376566, 0.41960785)
 position = Vector2(-354.00003, -427)
 scale = Vector2(1.803858, 0.8015452)
 
-[node name="ColorRect" type="ColorRect" parent="floor4" unique_id=341966966]
-offset_left = 142.0
-offset_top = 477.0
-offset_right = 187.39317
-offset_bottom = 511.4647
-scale = Vector2(16.214647, 1.8279579)
-metadata/_edit_use_anchors_ = true
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="floor4" unique_id=1606948907]
-position = Vector2(511.1267, 509.0168)
+position = Vector2(511.12665, 509.01678)
+scale = Vector2(0.99999994, 1)
 shape = SubResource("RectangleShape2D_80nbo")
 
 [node name="floor5" type="StaticBody2D" parent="." unique_id=1162823980]
 position = Vector2(385, -483.99994)
 rotation = 1.5707964
 scale = Vector2(1.5238587, 0.8015452)
-
-[node name="ColorRect" type="ColorRect" parent="floor5" unique_id=1131096137]
-offset_left = 142.0
-offset_top = 477.0
-offset_right = 187.39317
-offset_bottom = 511.4647
-scale = Vector2(16.214647, 1.8279579)
-metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="floor5" unique_id=1267140379]
 position = Vector2(510.21796, 508.39307)
@@ -77,21 +54,13 @@ position = Vector2(1586, -517)
 rotation = 1.5707964
 scale = Vector2(1.5238587, 0.8015452)
 
-[node name="ColorRect" type="ColorRect" parent="floor6" unique_id=31691666]
-offset_left = 142.0
-offset_top = 477.0
-offset_right = 187.39317
-offset_bottom = 511.4647
-scale = Vector2(16.214647, 1.8279579)
-metadata/_edit_use_anchors_ = true
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="floor6" unique_id=553541135]
 position = Vector2(510.21796, 508.39307)
 shape = SubResource("RectangleShape2D_80nbo")
 
 [node name="Shooting Point" parent="." unique_id=398007201 instance=ExtResource("3_feb5d")]
-position = Vector2(-284, -144)
-scale = Vector2(3.0197392, 3.1904166)
+position = Vector2(97, 247)
+scale = Vector2(1.2530274, 1.3396919)
 
 [node name="UI" type="Node" parent="." unique_id=8325026]
 
@@ -167,3 +136,25 @@ vertical_alignment = 1
 
 [node name="gameManager" type="Node" parent="." unique_id=335993651]
 script = ExtResource("5_7jktm")
+
+[node name="Shooting Point2" parent="." unique_id=1903475577 instance=ExtResource("3_feb5d")]
+position = Vector2(1032, 247)
+scale = Vector2(1.218171, 1.3170655)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1205728153]
+visible = false
+offset_left = -147.0
+offset_top = -87.0
+offset_right = -107.0
+offset_bottom = -47.0
+scale = Vector2(38.000565, 20.665686)
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="." unique_id=1766389104]
+visible = false
+offset_left = 239.0
+offset_top = 148.0
+offset_right = 307.0
+offset_bottom = 171.0
+scale = Vector2(10.9242935, 15.863687)
+text = "THE END"

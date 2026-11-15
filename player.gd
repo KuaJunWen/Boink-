@@ -92,15 +92,20 @@ func damage_boss(amount: int) -> void:
 func take_hit(damage: int, hit_from: Vector2) -> void:
 	health = max(health - damage, 0)
 	_update_health_label()
+	if health == 0 :
+		get_tree().paused = true
+		$"../ColorRect".show()
+		$"../Label".show()
+	else : 
+		var direction = (global_position - hit_from).normalized()
+		if direction == Vector2.ZERO:
+			direction = Vector2.UP
 
-	var direction = (global_position - hit_from).normalized()
-	if direction == Vector2.ZERO:
-		direction = Vector2.UP
+		velocity = direction * KNOCKBACK_SPEED
 
-	velocity = direction * KNOCKBACK_SPEED
-
-	is_slowed = true
-	slow_timer.start(SLOW_DURATION)
+		is_slowed = true
+		slow_timer.start(SLOW_DURATION)
+	
 
 
 func _on_slow_timer_timeout() -> void:
