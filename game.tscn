@@ -9,6 +9,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
 size = Vector2(736.945, 61.131927)
 
+[sub_resource type="Theme" id="Theme_7jktm"]
+
 [node name="game" type="Node2D" unique_id=86014103]
 position = Vector2(0, -1)
 script = ExtResource("1_feb5d")
@@ -134,6 +136,39 @@ text = "COOLDOWN : 10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="GameOver" type="ColorRect" parent="UI" unique_id=1429011322]
+visible = false
+offset_top = -1.0
+offset_right = 1161.0
+offset_bottom = 647.0
+theme = SubResource("Theme_7jktm")
+
+[node name="Over" type="Label" parent="UI/GameOver" unique_id=1616504438]
+layout_mode = 0
+offset_left = 282.0
+offset_top = 137.0
+offset_right = 883.0
+offset_bottom = 291.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "GAME OVER"
+
+[node name="Restart" type="Button" parent="UI/GameOver" unique_id=1434610013]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 316.0
+offset_right = 713.0
+offset_bottom = 400.0
+text = "Restart"
+
+[node name="Quit" type="Button" parent="UI/GameOver" unique_id=400806408]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 431.0
+offset_right = 713.0
+offset_bottom = 515.0
+text = "Quit"
+
 [node name="gameManager" type="Node" parent="." unique_id=335993651]
 script = ExtResource("5_7jktm")
 
@@ -141,20 +176,5 @@ script = ExtResource("5_7jktm")
 position = Vector2(1032, 247)
 scale = Vector2(1.218171, 1.3170655)
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1205728153]
-visible = false
-offset_left = -147.0
-offset_top = -87.0
-offset_right = -107.0
-offset_bottom = -47.0
-scale = Vector2(38.000565, 20.665686)
-color = Color(0, 0, 0, 1)
-
-[node name="Label" type="Label" parent="." unique_id=1766389104]
-visible = false
-offset_left = 239.0
-offset_top = 148.0
-offset_right = 307.0
-offset_bottom = 171.0
-scale = Vector2(10.9242935, 15.863687)
-text = "THE END"
+[connection signal="pressed" from="UI/GameOver/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="UI/GameOver/Quit" to="." method="_on_quit_pressed"]

@@ -94,8 +94,6 @@ func take_hit(damage: int, hit_from: Vector2) -> void:
 	_update_health_label()
 	if health == 0 :
 		get_tree().paused = true
-		$"../ColorRect".show()
-		$"../Label".show()
 	else : 
 		var direction = (global_position - hit_from).normalized()
 		if direction == Vector2.ZERO:
