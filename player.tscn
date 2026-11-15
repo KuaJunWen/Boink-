@@ -6,6 +6,19 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(9.99094, 35.111526)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_onrkg"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
 [node name="PLAYER" type="CharacterBody2D" unique_id=1653609979]
 position = Vector2(348, 172)
 script = ExtResource("1_onrkg")
@@ -18,3 +31,6 @@ texture = ExtResource("2_i3pqv")
 position = Vector2(4, 6.9666595)
 scale = Vector2(12.611427, 3.5866668)
 shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=176751501]
+sprite_frames = SubResource("SpriteFrames_onrkg")

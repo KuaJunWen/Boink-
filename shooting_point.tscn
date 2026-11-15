@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://1v63hnwqg8u1"]
+
+[ext_resource type="Texture2D" uid="uid://b373l0x1j8dkl" path="res://New Piskel (1).png" id="1_h7rmh"]
+
+[sub_resource type="GDScript" id="GDScript_8f2uf"]
+script/source = "extends Node2D
+
+const shooting_scene = preload(\"res://lazer.tscn\")
+@onready var shoot_timer = $\"Shoot timer\"
+@onready var rotator = $Rotator
+
+const spawn_point_count = 8 
+const radius = 10.0
+
+func _ready() -> void:
+	var step = 2 * PI / spawn_point_count
+	
+	# Generate static spawn points in a circle around the rotator node
+	for i in range(spawn_point_count):
+		var spawn_point = Node2D.new()
+		spawn_point.name = \"SpawnPoint_\" + str(i)
+		var pos = Vector2(radius, 0).rotated(step * i)
+		spawn_point.position = pos
+		# Face the spawn point outward from the center so lasers shoot straight out
+		spawn_point.rotation = pos.angle()
+		rotator.add_child(spawn_point)
+		
+	shoot_timer.wait_time = 0.3
+	shoot_timer.start()
+
+# NOTE: No _process(delta) function is used here, so it remains completely still.
+
+func _on_shoot_timer_timeout() -> void:
+	for s in rotator.get_children():
+		var lazer = shooting_scene.instantiate() # Instantiates the laser scene[span_1](start_span)[span_1](end_span)
+		get_tree().current_scene.add_child(lazer)
+		lazer.global_position = s.global_position
+		# Use the spawn point's fixed global rotation to shoot straight outward
+		lazer.global_rotation = s.global_rotation
+"
+
+[node name="Shooting Point" type="Node2D" unique_id=398007201]
+position = Vector2(228, 114.99999)
+scale = Vector2(3.0197392, 3.1904168)
+script = SubResource("GDScript_8f2uf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=467774362]
+position = Vector2(7.000001, 1)
+scale = Vector2(0.10117938, 0.110611044)
+texture = ExtResource("1_h7rmh")
+
+[node name="Shoot timer" type="Timer" parent="." unique_id=1997373260]
+wait_time = 0.351
+autostart = true
+
+[node name="Rotator" type="Node2D" parent="." unique_id=1634964828]
+position = Vector2(7, 9)
+
+[connection signal="timeout" from="Shoot timer" to="." method="_on_shoot_timer_timeout"]

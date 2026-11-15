@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://tbgxp7pu2ocl"]
+
+[ext_resource type="Texture2D" uid="uid://b373l0x1j8dkl" path="res://New Piskel (1).png" id="1_avoeb"]
+
+[sub_resource type="GDScript" id="GDScript_jhyuc"]
+script/source = "extends Node2D
+
+@export var speed: float = 600.0
+
+func _process(delta: float) -> void:
+	var direction = Vector2.RIGHT.rotated(global_rotation)
+	global_position += direction * speed * delta
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jhyuc"]
+size = Vector2(54, 47)
+
+[node name="lazer" type="Node2D" unique_id=1511489486]
+script = SubResource("GDScript_jhyuc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2030805703]
+position = Vector2(691.00006, 250)
+scale = Vector2(0.111360155, 0.10993563)
+texture = ExtResource("1_avoeb")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=694152805]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1428947995]
+position = Vector2(692, 252.5)
+shape = SubResource("RectangleShape2D_jhyuc")
+
+[node name="Kill time" type="Timer" parent="." unique_id=1390199997]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Kill time" to="." method="_on_kill_time_timeout"]
