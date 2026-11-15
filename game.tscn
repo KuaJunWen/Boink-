@@ -17,8 +17,8 @@ position = Vector2(596, 413)
 texture = ExtResource("1_e2o6t")
 
 [node name="PLAYER" parent="." unique_id=1653609979 instance=ExtResource("1_80nbo")]
-position = Vector2(580, 422)
-scale = Vector2(0.4831668, 0.5041541)
+position = Vector2(591, 458.00003)
+scale = Vector2(0.22750889, 0.18652126)
 
 [node name="floor" type="StaticBody2D" parent="." unique_id=1682969741]
 position = Vector2(-556, 245)
@@ -88,4 +88,4 @@ shape = SubResource("RectangleShape2D_80nbo")
 
 [node name="Shooting Point" parent="." unique_id=398007201 instance=ExtResource("3_feb5d")]
 position = Vector2(-203.99997, -101)
-scale = Vector2(3.0197392, 3.1904166)
+scale = Vector2(1.5468335, 1.5618907)
