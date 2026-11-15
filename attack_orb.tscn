@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dv2eob1f67438"]
+
+[ext_resource type="Script" uid="uid://br0yh6opfhprd" path="res://attack_orb.gd" id="1_h85br"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uf8hf"]
+radius = 37.28
+
+[node name="AttackOrb" type="Area2D" unique_id=2047573554]
+script = ExtResource("1_h85br")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1417601892]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_uf8hf")
+debug_color = Color(0.9993908, 0, 0.10578944, 1)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=490542668]
+offset_right = 30.0
+offset_bottom = 30.0
+color = Color(1, 0, 0, 1)
