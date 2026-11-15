@@ -12,9 +12,11 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 	
 	if is_on_floor():
+		$AnimatedSprite2D.play("default")
 		velocity.y = BOUNCE_VELOCITY
-		can_double_jump = true # Reset air jump upon bouncing
+		can_double_jump = true 
 	elif Input.is_action_just_pressed("ui_accept") and can_double_jump:
+		$AnimatedSprite2D.play("default")
 		velocity.y = JUMP_VELOCITY
 		can_double_jump = false # Consume the air jump
 		
