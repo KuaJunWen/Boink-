@@ -9,40 +9,48 @@ const MAX_BOSSHEALTH = 100
 const KNOCKBACK_SPEED = 500.0
 const SLOW_DURATION = 1.0
 const SLOW_MULTIPLIER = 0.5
-const ATTACK_COOLDOWN = 10.0
+
+const MIN_SPAWN_TIME = 2.5
+const MAX_SPAWN_TIME = 7.0
+const MIN_DISTANCE_FROM_PLAYER = 120.0
+
+const PICKUP_SCENE = preload("res://attack_orb.tscn")
 
 var health = MAX_HEALTH
 var bossHealth = MAX_BOSSHEALTH
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var can_double_jump = false
 var is_slowed = false
-var can_attack = true
+var is_game_over = false
+var current_orb: Node2D = null  # Tracks the currently active orb
 
 @onready var health_label = get_node_or_null("../UI/Panel/health")
 @onready var bossHealth_label = get_node_or_null("../UI/Panel2/boss")
-@onready var cooldown_label = get_node_or_null("../UI/Panel3/cooldown") # Update path if inside a Panel
+
+@onready var game_over_panel = get_node_or_null("../UI/GameOverPanel")
+@onready var result_label = get_node_or_null("../UI/GameOverPanel/ResultLabel")
+@onready var restart_button = get_node_or_null("../UI/GameOverPanel/RestartButton")
+
 @onready var slow_timer = Timer.new()
-@onready var attack_timer = Timer.new()
+@onready var spawn_timer = Timer.new()
 
 
 func _ready() -> void:
+	randomize()
+	get_tree().paused = false
+
 	slow_timer.one_shot = true
 	slow_timer.timeout.connect(_on_slow_timer_timeout)
 	add_child(slow_timer)
 
-	attack_timer.one_shot = true
-	attack_timer.timeout.connect(_on_attack_timer_timeout)
-	add_child(attack_timer)
+	spawn_timer.one_shot = true
+	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
+	add_child(spawn_timer)
+	_start_random_spawn_timer()
+		
 
 	_update_health_label()
 	_update_bosshealth_label()
-	_update_cooldown_label()
-
-
-func _process(_delta: float) -> void:
-	# Continuously update the cooldown label while the timer is running
-	if not can_attack:
-		_update_cooldown_label()
 
 
 func _physics_process(delta: float) -> void:
@@ -71,27 +79,56 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and not event.echo:
-		if event.keycode == KEY_F and can_attack:
-			damage_boss(5)
-			can_attack = false
-			attack_timer.start(ATTACK_COOLDOWN)
+func _start_random_spawn_timer() -> void:
+	var random_delay = randf_range(MIN_SPAWN_TIME, MAX_SPAWN_TIME)
+	spawn_timer.start(random_delay)
 
 
-func _on_attack_timer_timeout() -> void:
-	can_attack = true
-	_update_cooldown_label()
+func _on_spawn_timer_timeout() -> void:
+	if is_game_over:
+		return
+
+	# Remove the previous orb if it hasn't been collected yet
+	if is_instance_valid(current_orb):
+		current_orb.queue_free()
+
+	var pickup = PICKUP_SCENE.instantiate()
+	var screen_size = get_viewport_rect().size
+	var min_y = screen_size.y * 0.5         # Halfway down the screen (highest point)
+	var max_y = screen_size.y - 60.0        # Near the bottom of the screen (with padding)
+	var spawn_pos = Vector2.ZERO
+
+	# Pick a random spot in the lower half of the screen away from the player
+	for i in range(10):
+		spawn_pos = Vector2(
+			randf_range(60.0, screen_size.x - 60.0),
+			randf_range(min_y, max_y)
+		)
+		if spawn_pos.distance_to(global_position) >= MIN_DISTANCE_FROM_PLAYER:
+			break
+
+	pickup.global_position = spawn_pos
+	get_parent().add_child(pickup)
+	current_orb = pickup
+
+	_start_random_spawn_timer()
 
 
 func damage_boss(amount: int) -> void:
+	if is_game_over:
+		return
+
 	bossHealth = max(bossHealth - amount, 0)
 	_update_bosshealth_label()
 
 
 func take_hit(damage: int, hit_from: Vector2) -> void:
+	if is_game_over:
+		return
+
 	health = max(health - damage, 0)
 	_update_health_label()
+ 
 
 	var direction = (global_position - hit_from).normalized()
 	if direction == Vector2.ZERO:
@@ -101,6 +138,7 @@ func take_hit(damage: int, hit_from: Vector2) -> void:
 
 	is_slowed = true
 	slow_timer.start(SLOW_DURATION)
+
 
 
 func _on_slow_timer_timeout() -> void:
@@ -114,11 +152,3 @@ func _update_health_label() -> void:
 func _update_bosshealth_label() -> void:
 	if bossHealth_label:
 		bossHealth_label.text = "BOSS HEALTH : " + str(bossHealth)
-
-func _update_cooldown_label() -> void:
-	if cooldown_label:
-		if can_attack:
-			cooldown_label.text = "ATTACK: READY"
-		else:
-			# "%.1f" formats the remaining time to 1 decimal place (e.g., 9.4s)
-			cooldown_label.text = "COOLDOWN: %.1fs" % attack_timer.time_left
