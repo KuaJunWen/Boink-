@@ -108,5 +108,60 @@ offset_bottom = 53.0
 theme_override_font_sizes/font_size = 24
 text = "HEALTH : 100"
 
+[node name="Panel2" type="Panel" parent="UI" unique_id=1536977873]
+anchors_preset = -1
+anchor_left = 0.147
+anchor_top = 0.062000003
+anchor_right = 0.147
+anchor_bottom = 0.062000003
+offset_left = 724.656
+offset_top = -19.176003
+offset_right = 964.656
+offset_bottom = 46.823997
+
+[node name="boss" type="Label" parent="UI/Panel2" unique_id=939397692]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.089
+anchor_top = 0.32900003
+anchor_right = 0.089
+anchor_bottom = 0.32900003
+offset_left = -12.936001
+offset_top = -21.030003
+offset_right = 206.064
+offset_bottom = 40.969997
+theme_override_font_sizes/font_size = 24
+text = "BOSS HEALTH : 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel3" type="Panel" parent="UI" unique_id=328549619]
+anchors_preset = -1
+anchor_left = 0.147
+anchor_top = 0.062000003
+anchor_right = 0.147
+anchor_bottom = 0.062000003
+offset_left = 724.656
+offset_top = 61.823997
+offset_right = 964.656
+offset_bottom = 127.824
+metadata/_edit_use_anchors_ = true
+
+[node name="cooldown" type="Label" parent="UI/Panel3" unique_id=173135771]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.089
+anchor_top = 0.32900003
+anchor_right = 0.089
+anchor_bottom = 0.32900003
+offset_left = -11.360012
+offset_top = -20.714003
+offset_right = 207.63998
+offset_bottom = 41.285995
+theme_override_font_sizes/font_size = 24
+text = "COOLDOWN : 10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="gameManager" type="Node" parent="." unique_id=335993651]
 script = ExtResource("5_7jktm")
