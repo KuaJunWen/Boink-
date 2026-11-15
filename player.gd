@@ -5,11 +5,11 @@ const BOUNCE_VELOCITY = -450.0
 const JUMP_VELOCITY = -450.0
 
 const MAX_HEALTH = 100
-const MAX_BOSSHEALTH = 100
+const MAX_BOSSHEALTH = 10
 const KNOCKBACK_SPEED = 500.0
 const SLOW_DURATION = 1.0
 const SLOW_MULTIPLIER = 0.5
-const ATTACK_COOLDOWN = 10.0
+const ATTACK_COOLDOWN = 5.0
 
 var health = MAX_HEALTH
 var bossHealth = MAX_BOSSHEALTH
@@ -88,11 +88,15 @@ func damage_boss(amount: int) -> void:
 	bossHealth = max(bossHealth - amount, 0)
 	_update_bosshealth_label()
 
+	if bossHealth == 0:
+		get_tree().current_scene.show_win()
+
 
 func take_hit(damage: int, hit_from: Vector2) -> void:
 	health = max(health - damage, 0)
 	_update_health_label()
 	if health == 0 :
+		get_tree().current_scene.show_game_over()
 		get_tree().paused = true
 	else : 
 		var direction = (global_position - hit_from).normalized()

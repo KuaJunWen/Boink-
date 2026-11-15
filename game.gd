@@ -2,9 +2,18 @@ extends Node2D
 @export var move_offset := Vector2(200, 0) 
 
 @onready var game_over_panel = $UI/GameOver
+@onready var win_panel = $UI/Win
 # Distance and direction to move
 @export var duration := 2.0 # Time in seconds to reach the end
 
+func show_win() -> void:
+	game_over_panel.hide()
+	win_panel.show()
+	get_tree().paused = true
+	
+func _on_win_restart_pressed() -> void:
+	get_tree().paused = false
+	get_tree().reload_current_scene()
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event .is_action_pressed("quit"):

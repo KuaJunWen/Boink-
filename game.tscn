@@ -137,6 +137,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GameOver" type="ColorRect" parent="UI" unique_id=1429011322]
+process_mode = 2
 visible = false
 offset_top = -1.0
 offset_right = 1161.0
@@ -169,6 +170,40 @@ offset_right = 713.0
 offset_bottom = 515.0
 text = "Quit"
 
+[node name="Win" type="ColorRect" parent="UI" unique_id=1651173115]
+process_mode = 2
+visible = false
+offset_top = -1.0
+offset_right = 1161.0
+offset_bottom = 647.0
+theme = SubResource("Theme_7jktm")
+
+[node name="win" type="Label" parent="UI/Win" unique_id=731578052]
+layout_mode = 0
+offset_left = 349.0
+offset_top = 143.0
+offset_right = 950.0
+offset_bottom = 297.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "YOU WIN!"
+
+[node name="Restart" type="Button" parent="UI/Win" unique_id=261497823]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 316.0
+offset_right = 713.0
+offset_bottom = 400.0
+text = "Restart"
+
+[node name="Quit" type="Button" parent="UI/Win" unique_id=66892455]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 431.0
+offset_right = 713.0
+offset_bottom = 515.0
+text = "Quit"
+
 [node name="gameManager" type="Node" parent="." unique_id=335993651]
 script = ExtResource("5_7jktm")
 
@@ -178,3 +213,5 @@ scale = Vector2(1.218171, 1.3170655)
 
 [connection signal="pressed" from="UI/GameOver/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="UI/GameOver/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="UI/Win/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="UI/Win/Quit" to="." method="_on_quit_pressed"]
