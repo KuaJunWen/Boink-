@@ -5,9 +5,9 @@ const BOUNCE_VELOCITY = -450.0
 const JUMP_VELOCITY = -450.0
 
 const MAX_HEALTH = 100
-const KNOCKBACK_SPEED = 500.0
-const SLOW_DURATION = 1.0
-const SLOW_MULTIPLIER = 0.5
+const KNOCKBACK_SPEED = 700.0
+const SLOW_DURATION = 0.5
+const SLOW_MULTIPLIER = 0.3
 
 var health = MAX_HEALTH
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
