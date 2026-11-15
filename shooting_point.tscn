@@ -9,7 +9,7 @@ const shooting_scene = preload(\"res://lazer.tscn\")
 @onready var shoot_timer = $\"Shoot timer\"
 @onready var rotator = $Rotator
 
-const spawn_point_count = 15
+const spawn_point_count = 7
 const radius = 10
 @export var move_offset := Vector2(0, 200) # Distance and direction to move
 @export var duration := 5.0 # Time in seconds to reach the end
