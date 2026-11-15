@@ -2,8 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://jjg6oxadadpx" path="res://player.tscn" id="1_80nbo"]
 [ext_resource type="Texture2D" uid="uid://ds255y0lgwg4k" path="res://bg.png" id="1_e2o6t"]
-[ext_resource type="Script" path="res://game.gd" id="1_feb5d"]
+[ext_resource type="Script" uid="uid://2tfr8gqdlv5n" path="res://game.gd" id="1_feb5d"]
 [ext_resource type="PackedScene" uid="uid://1v63hnwqg8u1" path="res://shooting_point.tscn" id="3_feb5d"]
+[ext_resource type="Script" uid="uid://vu3f2bqnaqqn" path="res://game_manager.gd" id="5_7jktm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
 size = Vector2(736.945, 61.131927)
@@ -21,7 +22,7 @@ position = Vector2(580, 422)
 scale = Vector2(0.4831668, 0.5041541)
 
 [node name="floor" type="StaticBody2D" parent="." unique_id=1682969741]
-position = Vector2(-556, 245)
+position = Vector2(-560, 256)
 scale = Vector2(2.2890353, 0.8015452)
 
 [node name="ColorRect" type="ColorRect" parent="floor" unique_id=955760480]
@@ -37,7 +38,7 @@ position = Vector2(510.21796, 508.39307)
 shape = SubResource("RectangleShape2D_80nbo")
 
 [node name="floor4" type="StaticBody2D" parent="." unique_id=1566040816]
-position = Vector2(-342, -409)
+position = Vector2(-354.00003, -427)
 scale = Vector2(1.803858, 0.8015452)
 
 [node name="ColorRect" type="ColorRect" parent="floor4" unique_id=341966966]
@@ -70,7 +71,7 @@ position = Vector2(510.21796, 508.39307)
 shape = SubResource("RectangleShape2D_80nbo")
 
 [node name="floor6" type="StaticBody2D" parent="." unique_id=668604969]
-position = Vector2(1583, -494.99997)
+position = Vector2(1586, -517)
 rotation = 1.5707964
 scale = Vector2(1.5238587, 0.8015452)
 
@@ -89,3 +90,23 @@ shape = SubResource("RectangleShape2D_80nbo")
 [node name="Shooting Point" parent="." unique_id=398007201 instance=ExtResource("3_feb5d")]
 position = Vector2(-203.99997, -101)
 scale = Vector2(3.0197392, 3.1904166)
+
+[node name="UI" type="Node" parent="." unique_id=8325026]
+
+[node name="Panel" type="Panel" parent="UI" unique_id=138988886]
+offset_left = 12.0
+offset_top = 16.0
+offset_right = 213.0
+offset_bottom = 84.0
+
+[node name="health" type="Label" parent="UI/Panel" unique_id=33119100]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 19.0
+offset_right = 184.0
+offset_bottom = 53.0
+theme_override_font_sizes/font_size = 24
+text = "HEALTH : 100"
+
+[node name="gameManager" type="Node" parent="." unique_id=335993651]
+script = ExtResource("5_7jktm")
