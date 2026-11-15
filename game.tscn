@@ -2,7 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://jjg6oxadadpx" path="res://player.tscn" id="1_80nbo"]
 [ext_resource type="Texture2D" uid="uid://ds255y0lgwg4k" path="res://bg.png" id="1_e2o6t"]
-[ext_resource type="Script" uid="uid://2tfr8gqdlv5n" path="res://game.gd" id="1_feb5d"]
+[ext_resource type="Script" path="res://game.gd" id="1_feb5d"]
+[ext_resource type="PackedScene" uid="uid://1v63hnwqg8u1" path="res://shooting_point.tscn" id="3_feb5d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
 size = Vector2(736.945, 61.131927)
@@ -84,3 +85,7 @@ metadata/_edit_use_anchors_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="floor6" unique_id=553541135]
 position = Vector2(510.21796, 508.39307)
 shape = SubResource("RectangleShape2D_80nbo")
+
+[node name="Shooting Point" parent="." unique_id=398007201 instance=ExtResource("3_feb5d")]
+position = Vector2(-203.99997, -101)
+scale = Vector2(3.0197392, 3.1904166)

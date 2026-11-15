@@ -19,7 +19,7 @@ size = Vector2(54, 47)
 script = SubResource("GDScript_jhyuc")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2030805703]
-position = Vector2(691.00006, 250)
+position = Vector2(0, 11)
 scale = Vector2(0.111360155, 0.10993563)
 texture = ExtResource("1_avoeb")
 
